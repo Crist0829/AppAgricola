@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>APP AGRICOLA</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="view/assets/media/image/favicon.png"/>
+
+    <!-- Plugin styles -->
+    <link rel="stylesheet" href="view/vendors/bundle.css" type="text/css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="view/assets/css/app.min.css" type="text/css">
+</head>
+
+<body class="form-membership">
+
+<!-- begin::preloader-->
+<div class="preloader">
+    <div class="preloader-icon"></div>
+</div>
+<!-- end::preloader -->
+
+<div class="form-wrapper">
+
+    <!-- logo -->
+    <div id="logo">
+        <img src="view/assets/media/image/login.png" alt="image">
+    </div>
+    <!-- ./ logo -->
+
+    
+    <h5>Bienvenido a la App</h5>
+
+    <!-- form -->
+    <form method="POST" action="controller/procesar-login.php" onsubmit="return validarLogin()">
+
+        <div class="form-group">
+                <input type="text" class="form-control" name="valor" placeholder="Email" required id="valor" onchange="validarNombreCorreo()" autofocus>
+            <p id="tlogin"></p>
+        </div>
+        
+        <div class="form-group">
+            <input type="password" class="form-control" name="clave"  placeholder="Contraseña" required>
+        </div>
+        
+        <div class="form-group d-flex justify-content-between">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name = "recordar" checked="" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Recordar contraseña</label>
+            </div>
+            <a href="recuperar-clave.html" class="texto-verde">¿Olvidó la contraseña?</a>
+        </div>
+        <button class="btn btn-primary btn-block">INGRESAR</button>
+
+        <hr>
+    
+        <div class="d-flex justify-content-lg-around">
+
+            <p>¿No tienes una cuenta? <p> <a href="view/registrarse.php" class="texto-verde"> Registrarse ahora</a> </p> </p>
+
+        </div>
+        
+        
+    </form>
+    <!-- ./ form -->
+<!-- Footer -->
+
+    
+
+
+</div>
+
+<!-- Plugin scripts -->
+<script src="view/vendors/bundle.js"></script>
+
+<!-- App scripts -->
+<script src="view/assets/js/app.min.js"></script>
+<script src="view/assets/js/validar.js"></script>
+</body>
+
+</html>
