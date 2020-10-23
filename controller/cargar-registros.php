@@ -1,13 +1,12 @@
 <?php 
 
 require_once("../model/base-datos-registros.php");
-
 session_start();
 
 
 $identificador = $_SESSION["identificador"];
-
 $registros = new Registro();
+
 
 function cargarPlanillas(){
 
@@ -30,7 +29,6 @@ function cargarPlanillas(){
 }
 
 
-
 if($registros->cargarRegistrosBase($identificador)){
 
     foreach($registros->cargarRegistrosBase($identificador) as $registro){
@@ -43,7 +41,7 @@ if($registros->cargarRegistrosBase($identificador)){
             </button>
             <div class='dropdown-menu'>
             <a class='dropdown-item' href='index.php?pagina=5&registro=".$registro["nombre"]."'>USUARIOS</a>
-            <a class='dropdown-item' href='#'>CREAR PLANILLA</a>
+            <a class='dropdown-item' href='#'>AGREGAR PLANILLA</a>
             <a class='dropdown-item' href='#'></a>
             <div class='dropdown-divider'></div>
             <a class='dropdown-item' href='#'>ELIMINAR REGISTRO</a>
@@ -67,14 +65,6 @@ if($registros->cargarRegistrosBase($identificador)){
     echo "<h4> AUN NO HAS CREADO NINGÚN REGISTRO </h4>";
 
 }
-
-
-
-
-
-
-
-
 
 
 

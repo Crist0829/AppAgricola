@@ -31,7 +31,6 @@ class ConexionRegistro{
 
 }
 
-
 class Registro extends ConexionRegistro{
 
     public function consultarNombreRegistro($nombre){
@@ -63,8 +62,8 @@ class Registro extends ConexionRegistro{
         $this->consulta = "CREATE TABLE $nombre
         (nombre varchar(60) NOT NULL,
         identificador int(15),
-        perfil int(1),
-        planillas int(10))";
+        imagen varchar(100),
+        correo varchar(100))";
 
         $resultado = $this->conexion_db->prepare($this->consulta);
         $resultado->execute();
@@ -73,12 +72,12 @@ class Registro extends ConexionRegistro{
 
     }
 
-    public function insertarRegistro($nombre, $identificador, $perfil){
+    public function insertarRegistro($nombre, $identificador){
 
-        $this->consulta = "INSERT INTO registros_base (nombre, identificador, perfil) values (:nombre, :identificador, :perfil)";
+        $this->consulta = "INSERT INTO registros_base (nombre, identificador) values (:nombre, :identificador)";
 
         $resultado = $this->conexion_db->prepare($this->consulta);
-        $resultado->execute(array(":nombre"=>$nombre, ":identificador"=>$identificador, ":perfil"=>$perfil));
+        $resultado->execute(array(":nombre"=>$nombre, ":identificador"=>$identificador ));
 
         if($resultado->rowCount()){
 
@@ -105,6 +104,60 @@ class Registro extends ConexionRegistro{
         $this->registro = $resultado->fetchAll(PDO::FETCH_ASSOC);
         $resultado->closeCursor();
         return $this->registro;
+    }
+
+    public function cargarUsuarios($nombre_tabla){
+
+        $this->consulta = "SELECT * FROM $nombre_tabla";
+        
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute();
+        
+        $this->registro = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        $resultado->closeCursor();
+        return $this->registro;
+
+    }
+
+    public function consultarUsuario($nombre_tabla, $identificador){
+
+        $this->consulta = "SELECT * FROM $nombre_tabla where identificador = :identificador";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":identificador", $identificador);
+        $resultado->execute();
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+    }
+
+    public function conectarUsuario($nombre_tabla, $nombre, $identificador, $correo, $imagen){
+
+        $this->consulta = "INSERT INTO $nombre_tabla (nombre, identificador, correo, imagen) VALUES (:nombre, :identificador, :correo, :imagen)";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute(array(":nombre" => $nombre, ":identificador" => $identificador, ":correo" => $correo, ":imagen"  => $imagen));
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
     }
 
 }

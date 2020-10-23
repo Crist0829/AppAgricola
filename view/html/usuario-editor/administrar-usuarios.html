@@ -72,10 +72,21 @@
                 <div class="card-body">
                     <h5 class="card-title">USUARIOS <i data-feather="users"></i></h5>
 
-                    <div id="registros">
+                    <div id="usuarios">
+   
+                        <?php  
 
+                        if(isset($_GET["registro"])){
+
+                                $_SESSION["nombre_registro"] = $_GET["registro"];
+
+                        }else{
+
+                            echo "Nada qué mostrar";
+
+                        }
                         
-
+                        ?>
 
                     </div>
 
@@ -101,7 +112,7 @@
 </div>
 <!-- ./ Layout wrapper -->
 
-<script src="view/assets/js/cargar-registros.js"></script>
+<script src="view/assets/js/cargar-usuarios.js"></script>
 
 <!-- Main scripts -->
 <script src="view/vendors/bundle.js"></script>

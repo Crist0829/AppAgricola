@@ -1,0 +1,9 @@
+{
+    "name": "AppAgricola/AppAgricola",
+    "require": {
+
+        "phpmailer/phpmailer": "~6.1"
+
+    }
+
+}

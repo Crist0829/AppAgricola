@@ -94,8 +94,48 @@ if(isset($_GET["mensaje"])){
             }
             </script>";
 
-        }
+        }/* else if($_GET["mensaje"] == 10){
+
+            echo "<script>
+
+            window.onload=function() {
+                
+                swal('ERROR AL CONECTAR USUARIO', 'No pudimos conectar el usuario al registro, por favor, intentelo más tarde', 'error');
+            }
+            </script>";
+
+        }else if($_GET["mensaje"] == 11){
+
+            echo "<script>
+
+            window.onload=function() {
+                
+                swal('CONTRASEÑA INCORRECTA', 'No pudimos conectar el usuario al registro', 'error');
+            }
+            </script>";
+
+        }else if($_GET["mensaje"] == 12){
+
+            echo "<script>
+
+            window.onload=function() {
+                
+                swal('El ID del usuario ya está conectado con esté registro...');
+            }
+            </script>";
+
+        }else if($_GET["mensaje"] == 9){
+
+            echo "<script>
+
+            window.onload=function() {
+                
+                swal('¡USUARIO CONECTADO!', 'Conectaste al usuario con el registro, ahora el puede llenar y consultar las planillas', 'success');
+            }
+            </script>";
+        }*/
         
+
 
 
 }

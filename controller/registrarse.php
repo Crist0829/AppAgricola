@@ -1,10 +1,12 @@
 <?php 
 
 require_once("../model/base-datos.php");
-use PHPMailer\PHPMailer\PHPMailer;
-require_once("PHPMailer-master/src/PHPMailer.php");
-require_once("PHPMailer-master/src/SMTP.php");
 
+use  PHPMailer \ PHPMailer \ PHPMailer ;
+use  PHPMailer \ PHPMailer \ SMTP ;
+use  PHPMailer \ PHPMailer \ Exception ;
+
+require ("vendor/autoload.php");
 
 
 $nombre = htmlentities(addslashes($_POST["nombre"]));
@@ -12,14 +14,21 @@ $correo = htmlentities(addslashes($_POST["correo"]));
 $clave = htmlentities(addslashes($_POST["clave"]));
 $clave_cifrada =password_hash($clave, PASSWORD_DEFAULT);
 $perfil = $_POST["perfil"];
-$identificador = rand(0, 999999);
 
+$identificador = rand(0, 9999999);
+
+$consultar_identificador = new Consultar();
+
+while($consultar_identificador->consultarIdentificador($identificador)){
+
+    $identificador = rand(0, 9999999);
+
+}
 
 $activacion_sin = rand(0, 99999);
 $activacion_con = password_hash($activacion_sin, PASSWORD_DEFAULT);
 
 $registrar = new Insertar();
-
 
 if($registrar->insertarUsuarioTemp($nombre, $correo, $clave_cifrada, $perfil, $identificador, $activacion_con)){
 
@@ -44,15 +53,9 @@ if (!$mail->send()) {
 
     echo 'The email message was sent.';
     header("location:../view/verificacion.php");
-    
-
 
 }
 }
-
-
-
-
 
 
 ?>

@@ -189,6 +189,30 @@ class Consultar extends Conexion{
 
     }
 
+    public function consultarIdentificador($identificador){
+
+        $this->consulta = "SELECT * FROM usuarios_db where identificador = :identificador";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":identificador", $identificador);
+        $resultado->execute();
+
+        if($resultado->rowCount() > 0){
+
+            $this->registro = $resultado->fetch(PDO::FETCH_ASSOC);
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+
+
+    }
+
     public function getRegistro(){
 
         return $this->registro;
@@ -326,7 +350,6 @@ class Activacion extends Conexion{
 
 
 }
-
 
 class Validar extends Conexion{
 

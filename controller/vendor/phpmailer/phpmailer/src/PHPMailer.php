@@ -747,7 +747,7 @@ class PHPMailer
      *
      * @var string
      */
-    const VERSION = '6.1.7';
+    const VERSION = '6.1.8';
 
     /**
      * Error severity: message only, continue processing.
@@ -1610,6 +1610,9 @@ class PHPMailer
                     return $this->mailSend($this->MIMEHeader, $this->MIMEBody);
             }
         } catch (Exception $exc) {
+            if ($this->Mailer === 'smtp' && $this->SMTPKeepAlive == true) {
+              $this->smtp->reset();
+            }
             $this->setError($exc->getMessage());
             $this->edebug($exc->getMessage());
             if ($this->exceptions) {
@@ -1748,6 +1751,23 @@ class PHPMailer
     protected static function isPermittedPath($path)
     {
         return !preg_match('#^[a-z]+://#i', $path);
+    }
+
+    /**
+     * Check whether a file path is safe, accessible, and readable.
+     *
+     * @param string $path A relative or absolute path to a file
+     *
+     * @return bool
+     */
+    protected static function fileIsAccessible($path)
+    {
+        $readable = file_exists($path);
+        //If not a UNC path (expected to start with \\), check read permission, see #2069
+        if (strpos($path, '\\\\') !== 0) {
+            $readable = $readable && is_readable($path);
+        }
+        return static::isPermittedPath($path) && $readable;
     }
 
     /**
@@ -2138,7 +2158,7 @@ class PHPMailer
         // There is no English translation file
         if ('en' !== $langcode) {
             // Make sure language file path is readable
-            if (!static::isPermittedPath($lang_file) || !file_exists($lang_file)) {
+            if (!static::fileIsAccessible($lang_file)) {
                 $foundlang = false;
             } else {
                 // Overwrite language-specific strings.
@@ -2952,7 +2972,7 @@ class PHPMailer
      * @param string $path        Path to the attachment
      * @param string $name        Overrides the attachment name
      * @param string $encoding    File encoding (see $Encoding)
-     * @param string $type        File extension (MIME) type
+     * @param string $type        MIME type, e.g. `image/jpeg`; determined automatically from $path if not specified
      * @param string $disposition Disposition to use
      *
      * @throws Exception
@@ -2967,7 +2987,7 @@ class PHPMailer
         $disposition = 'attachment'
     ) {
         try {
-            if (!static::isPermittedPath($path) || !@is_file($path) || !is_readable($path)) {
+            if (!static::fileIsAccessible($path)) {
                 throw new Exception($this->lang('file_access') . $path, self::STOP_CONTINUE);
             }
 
@@ -3141,7 +3161,7 @@ class PHPMailer
     protected function encodeFile($path, $encoding = self::ENCODING_BASE64)
     {
         try {
-            if (!static::isPermittedPath($path) || !file_exists($path) || !is_readable($path)) {
+            if (!static::fileIsAccessible($path)) {
                 throw new Exception($this->lang('file_open') . $path, self::STOP_CONTINUE);
             }
             $file_buffer = file_get_contents($path);
@@ -3527,7 +3547,7 @@ class PHPMailer
         $disposition = 'inline'
     ) {
         try {
-            if (!static::isPermittedPath($path) || !@is_file($path) || !is_readable($path)) {
+            if (!static::fileIsAccessible($path)) {
                 throw new Exception($this->lang('file_access') . $path, self::STOP_CONTINUE);
             }
 
