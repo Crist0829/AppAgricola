@@ -67,33 +67,50 @@
             <div class="card">
                 
                 <div class="card-body">
-                    <h5 class="card-title">CREAR REGISTRO <i data-feather="plus"></i></h5>
+                    <h6 class="card-title texto-verde">CREAR REGISTRO</h6>
+                   
+                    <div class="registro-2 col-md-6">
+                    <h5 class="text-center">¿Qué es un registro?</h5>
+                    <hr>
+                    <p class="p-per text-center">Un registro es un lugar que vas a administrar, como una finca, establo, viñedo, etc...
+                        allí podrás establecer planillas que son tablas que los usuarios que se conectan al registro
+                        pueden o deben llenar con información relevante como la ficha de asistencia, el legajo de trabajador, horas trabajadas, etc. 
+                        Tú podrás conectar usuarios al registro, administar y crear planillas y acceder a la información y descargarla.
+                    </p>
+                    </div>
 
+                    <div class="registro-2 col-md-6">
+                    <h5 class="text-center">Crear registro</h5>
+                    <hr>
+                    
                     <form onsubmit="return validar()" method="POST" action="controller/crear-registro.php">
-                        <div class="row">   
-                            <div class="col-md-4">
+                          
+                
                         <div class="form-group">
-
-                            <label>Nombre del registro</label>
+                            
+                            <label>Nombre del registro:</label>
+                            <p class="p-per" id="enombre"></p>
                             <input type="text" class="form-control" name="nombre" onchange = "fNombre()" id="nombre"  required>
-                            <p class="texto-verde-2"><small>Ejemplo: Finca Monsalve, Finca Don Carlos, Viñedos María, etc... </small> </p>
-                            <p id="enombre"></p>
+                            <p class="p-per-2"><small>Ejemplo: Finca Monsalve, Finca Don Carlos, Viñedos María, etc... </small> </p>
+                            
+                            <hr>
 
                         </div>
                         
                         <div class="form-group">
 
-                            <label>Escribe tu contraseña para confirmar</label>
+                            <label>Escribe tu contraseña para confirmar:</label>
                             <input type="password" name="clave" id="clave" class="form-control" required>
+                            <hr>
 
                         </div>
 
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary btn-block" value="CREAR REGISTRO">
                         </div>
-                            </div>
-                        </div>     
+                            
                     </form>
+                </div>
 
                 </div>
                 

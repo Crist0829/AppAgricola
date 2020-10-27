@@ -160,6 +160,28 @@ class Registro extends ConexionRegistro{
         }
     }
 
+    public function desvincularUsuario($identificador, $nombre_tabla){
+
+        $this->consulta = "DELETE FROM $nombre_tabla WHERE identificador = :identificador";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":identificador", $identificador);
+        $resultado->execute();
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+
+
+    }
 }
 
 class Planilla extends ConexionRegistro{
@@ -213,6 +235,30 @@ class Planilla extends ConexionRegistro{
         
 
 
+
+    }
+
+    public function consultarPlanillaTabla($nombre){
+
+        $this->consulta = "SHOW TABLES LIKE ?";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+       
+        $resultado->bindValue(1, $nombre, PDO::PARAM_STR);
+        $resultado->execute();
+
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
 
     }
 

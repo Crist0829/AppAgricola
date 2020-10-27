@@ -13,11 +13,11 @@ function fNombre(){
     nombre_v = nombre.split("");
     
     if((minus.test(nombre_v[0]) == 0 && mayus.test(nombre_v[0]) == 0)|| nombre.length >  30 || nombre == ""){
-        document.getElementById("enombre").setAttribute("class", "texto-rojo");
-        document.getElementById("enombre").innerHTML = "No puede iniciar con un número <br> \n\
-                                                         o  caracter especial <br> \n\
+        document.getElementById("enombre").setAttribute("class", "p-per-3");
+        document.getElementById("enombre").innerHTML = "No puede iniciar con un número \n\
+                                                         o  caracter especial  \n\
                                                           y tampoco puede estar vacío \n\
-                                                          o tener más de 30 caracteres";
+                                                          o tener más de 30 caracteres.";
         aux_n = 0;
         
     
@@ -32,13 +32,13 @@ function fNombre(){
         
             if(resultado == 0){
 
-                document.getElementById("enombre").setAttribute("class", "texto-verde");
+                document.getElementById("enombre").setAttribute("class", "p-per-4");
                 document.getElementById("enombre").innerHTML = "El nombre de registro está disponible";
                 aux_n = 1;
     
             }else{
     
-                document.getElementById("enombre").setAttribute("class", "texto-rojo");
+                document.getElementById("enombre").setAttribute("class", "p-per-3");
                 document.getElementById("enombre").innerHTML = "Ya has creado un registro con ese nombre, intenta con otro.";
                 aux_n = 2;
     

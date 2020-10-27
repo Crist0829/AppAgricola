@@ -1,0 +1,257 @@
+<?php  
+
+                        if(isset($_GET["registro"])){
+
+                                $_SESSION["nombre_registro"] = $_GET["registro"];
+
+                        }else{
+
+                            echo "Nada qué mostrar";
+
+                        }
+                        
+                        ?>
+
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App Agricola</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="view/assets/media/image/favicon.png"/>
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="view/vendors/bundle.css" type="text/css">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- App css -->
+
+    <link rel="stylesheet" href="view/assets/css/app.min.css" type="text/css">
+
+</head>
+
+<body class="hidden-navigation">
+
+<!-- Precargador -->
+<div class="preloader">
+    <div class="preloader-icon"></div>
+    <span>cargando</span>
+</div>
+<!-- ./ Precarcador-->
+
+
+<!-- Layout wrapper -->
+<div class="layout-wrapper">
+
+    
+
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+
+        <!-- Content body -->
+        <div class="content-body">
+            <!-- Content -->
+            <div class="content ">
+                
+                <div class="page-header">
+                    <div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+
+                                <li class="breadcrumb-item">
+                                    <a href="index.php?pagina=0">Inicio</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <i data-feather="layers"></i> <a href="index.php?pagina=1">Mis registros</a> 
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <i data-feather="file-text"></i> <a href="index.php?pagina=1">agregar-planilla</a> 
+                                </li>
+
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <h1 class="text-center texto-verde"><?php echo $_GET["registro"] ?></h1>
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="card">
+                
+                <div class="card-body">
+                    
+
+                    <div class="registro-2">
+                        <h5 class="card-title text-center"> GENERAR PLANILLA</i></h5>
+                        <hr>
+
+                        <form action="index.php" onsubmit="return false">
+
+                            <div class="form-group">
+
+                                <label for="nombre"> NOMBRE DE LA PLANILLA:</label>
+                                <p  class = "p-per-3" id="enombre"></p>
+                                <input type="text"  class="form-control" name="nombre" id="nombre" onchange="fNombre()">
+                                <p class="p-per-2">ejemplo: ficha de asistencia, registro de riego, tareas diarias, etc.</p>
+                                <p  class = "p-per-3" id="enombre"></p>
+                                <hr>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="ncolumnas"> NÚMERO DE COLUMNAS:</label>
+                                <p id="ecolumnas"></p>
+                                <input type="text"  class="form-control" name="ncolumnas" id ="ncolumnas" onchange="fNColumnas()">
+                                <p class="p-per-2">Son los campos que el usuario va a llenar, una vez generada la planilla, podrás elegir el nombre de cada campo o columna 
+                                    y el tipo de informaión que el usuario debe llenar.</p>
+                                <hr>
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="frecuencia"> FRECUENCIA CON LA QUE SE DEBE LLENAR:</label>
+                                <select name="frecuencia" id="frecuencia" class="form-control">
+                                    <option value = "diario">Diario</option>
+                                    <option value = "semanal">Semanal</option>
+                                    <option value = "quincenal">Quincenal</option>
+                                    <option value = "mensual">Mensual</option>
+                                    <option value = "anual">Anual</option>
+                                </select>
+                                <hr>
+                            </div>
+                            <div class="form-group">
+                                <label>NOTAS U OBSERVACIONES:</label>
+                                <p class="p-per-2">Opcional. Agrega notas u observaciones que quieres que el usuario vea cuando abra
+                                    la planilla. Ejemplo: "las imagenes deben tener cierta resolución", "Tener en cuenta el campo a",
+                                    "Esta planilla tiene prioridad máxima", etc, etc...
+                                </p>
+                                <textarea name="observaciones" id = 'observaciones' rows="5" class="form-control" style="resize: none;"></textarea>
+                                <hr>
+                            </div>
+
+                            <div class="form-group">
+
+                                <p class="p-per-2"> Nota: Al generar la planilla, sólo tendrás una vista general para que puedas agregar los nombres 
+                                    de los campos o columnas, sólo cuando le des en guardar planilla, la planilla se almacenará
+                                    en la base de datos y ahí los usuarios conectados al registro podrán ver la información de la planilla
+                                    y llenar los campos.
+                                </p>
+                                
+                                <a href="#planilla" class="btn btn-primary btn-block" onclick="generarPlanilla()" id='generar'>GENERAR</a>
+                                
+
+                            </div>
+
+
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card">
+                
+                <div class="card-body">
+                    <div class="registro-2">
+                        <h5 class="card-title text-center"> GENERAR APARTIR DE PLANTILLA</i></h5>
+                        <hr>
+
+                        <form>
+
+                            <div class="form-group">
+
+                                
+                                <p class="p-per-2">Tenemos diversas plantillas para que puedas eleigr la que más se adapte 
+                                    a tus necesidades, así ahorras tiempo y esfuerzo.
+                                </p>
+                                <select name="plantilla" class="form-control">
+                                    <option value = "asistencia" selected>ELEGIR</option>
+                                    <option value = "asistencia">FICHA DE ASISTENCIA</option>
+                                    <option value = "personal">INFORMACIÓN PERSONAL</option>
+                                    <option value = "horas">HORAS TRABAJADAS</option>
+                                    <option value = "riego">REGISTRO RIEGO</option>
+                                    <option value = "materiales">MATERIALES</option>
+                                </select>
+                                <hr>
+
+                            </div>
+
+                         
+
+                            <div class="form-group">
+
+                                
+                                <button class="btn btn-primary btn-block">GENERAR</button>
+                                
+
+                            </div>
+
+
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="card">
+                
+                <div class="card-body" id = "planilla">
+                    <h5 class="card-title">PLANILLA <i data-feather="file-text"></i></h5>
+                    <p>Aquí aparecera la planilla generada cuando le des en el botón de "GENERAR"
+                        en la sección de <strong>generar planilla</strong> o <strong>generar a partir de plantilla</strong>
+                    </p>
+
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+            </div>
+            <!-- ./ Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer">
+                <div>© 2020 APP agrícola - <a href="#" target="_blank">App Agrícola</a></div>
+
+            </footer>
+            <!-- ./ Footer -->
+        </div>
+        <!-- ./ Content body -->
+    </div>
+    <!-- ./ Content wrapper -->
+</div>
+<!-- ./ Layout wrapper -->
+
+<script src="view/assets/js/planillas.js"></script>
+
+<!-- Main scripts -->
+<script src="view/vendors/bundle.js"></script>
+
+
+<!-- App scripts -->
+<script src="view/assets/js/app.min.js"></script>
+</body>
+
+</html>

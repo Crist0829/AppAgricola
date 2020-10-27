@@ -604,9 +604,10 @@ Author URL:   https://themeforest.net/user/laborasyon/portfolio
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Sansation-AppAgricola";
   position: relative;
   background-color: #6EE138;
+  letter-spacing: 1px;
   color: black;
   font-size: 14px;
   overflow: hidden;
@@ -671,6 +672,31 @@ body.no-scroll {
     transform: rotate(360deg);
   }
 }
+
+@font-face{
+
+  font-family: Sansation-AppAgricola;
+  src: url(../../fonts/Sansation_Regular.ttf);
+}
+
+@font-face{
+
+  font-family: Sansation-AppAgricola-Bold;
+  src: url(../../fonts/Sansation_Bold.ttf);
+}
+
+@font-face{
+
+  font-family: Sansation-AppAgricola-Italic;
+  src: url(../../fonts/Sansation_Italic.ttf);
+}
+
+@font-face{
+
+  font-family: Sansation-AppAgricola-Light;
+  src: url(../../fonts/Sansation_Light.ttf);
+}
+
 
 .preloader svg path {
   fill: #5066e1;
@@ -1878,7 +1904,7 @@ ul.list-inline li {
 }
 
 hr {
-  border-color: #6865652f;
+  border-color: #3DD4002f;
 }
 
 .right-0 {
@@ -2158,22 +2184,20 @@ a.btn[href="#previous"]:hover {
 
 .btn.btn-light-primary {
   color: white !important;
-  background: rgba(80, 102, 225, 0.3);
+  background: #3cd400cb;
   border-color: transparent;
-  color: #1f36b6;
-  box-shadow: 0px 2px 8px 0px rgba(80, 102, 225, 0.45);
 }
 
 .btn.btn-light-primary:not(:disabled):not(.disabled):hover,
 .btn.btn-light-primary:not(:disabled):not(.disabled):focus,
 .btn.btn-light-primary:not(:disabled):not(.disabled):active,
 .btn.btn-light-primary:not(:disabled):not(.disabled).active {
-  background: rgba(80, 102, 225, 0.5);
+  background:#3cd400;
   border-color: transparent;
 }
 
 .btn.btn-light-primary:not(:disabled):not(.disabled):focus {
-  box-shadow: 0 0 0 0.2rem rgba(80, 102, 225, 0.2);
+  box-shadow: 0 0 0 0.1rem rgba(3, 61, 7, 0.2);
 }
 
 .btn.btn-light-primary.btn-pulse:not(:disabled):not(.disabled) {
@@ -9982,6 +10006,30 @@ small {
 
 }
 
+.p-per-2{
+  margin-top: 1px !important;
+  margin-bottom: 1px;
+  padding-top: 1px;
+  color: gray;
+
+}
+
+.p-per-3{
+  margin-top: 1px !important;
+  margin-bottom: 1px;
+  padding-top: 1px;
+  color: red;
+
+}
+
+.p-per-4{
+  margin-top: 1px !important;
+  margin-bottom: 1px;
+  padding-top: 1px;
+  color: #3DD400;
+
+}
+
 
 .texto-menu{
 
@@ -10010,7 +10058,7 @@ small {
   justify-content: center;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  border: 1px gray solid;
+  border: 1px #3DD400 solid;
   border-radius: 0.5rem;
 
 
@@ -10022,7 +10070,7 @@ small {
   flex-direction: column;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  border: 1px #8080806c solid;
+  border: 1px #3DD4006c solid;
   border-radius: 0.5rem;
 
 
@@ -10036,7 +10084,7 @@ small {
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin-bottom: 1.5rem;
-  border: 1px #0000009c solid;
+  border: 1px #3DD4009c solid;
   border-radius: 0.5rem;
 
 
@@ -10044,13 +10092,13 @@ small {
 
 .titulo-planillas{
 
-  color: gray;
+  color: black;
   margin: 1rem;
 
 }
 .titulo-usuarios{
 
-  color: gray;
+  color: black;
   margin: 0.5rem;
   margin-bottom: 1rem;
 

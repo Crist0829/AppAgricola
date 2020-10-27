@@ -100,12 +100,12 @@ if(isset($_SESSION["nombre_registro"])){
             <div class= 'registro col-md-6'>
             <h5 class = 'text-center'>Conectar usuario</h5>
             <hr>
-            <p> Aún no has conectado usuarios a <strong> $nombre_registro_normal </strong> </p>
+            <p class = 'text-center'> Aún no has conectado usuarios a <strong> $nombre_registro_normal </strong> </p>
             </div>";
 
             echo "
-                <div class = 'registro col-md-6'>
-                <h5 class = 'text-center'>Conectar usuario</h5>
+                <div class = 'registro-3 col-md-6' id='conectar'>
+                <h5 class = 'titulo-usuarios text-center'>CONECTAR USUARIO</h5>
                 <hr>
                 <form onsubmit='return validar()' method='POST' action='controller/conectar-usuario.php' class = 'col-md-6 d-flex align-self-center'>
                     <div>

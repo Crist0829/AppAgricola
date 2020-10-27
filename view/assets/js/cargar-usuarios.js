@@ -59,7 +59,26 @@ function confirmar(a){
     let opcion = confirm("¿Estás seguro que deseas desvincular al usuario del registro? Al hacer esto no se perderá el historial de las planillas que ha llenado pero en adelante, el usuario no podrá ver el registro");
     if (opcion == true) {
 
-       document.getElementById(a).setAttribute("href", "../controller/desvincular-usuario.php?id="+a)
+        var xhttp = new XMLHttpRequest();
+    
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+    
+            let respuesta = parseInt(this.responseText)  
+            
+            if(respuesta){
+
+                location.reload();
+
+            }else{
+
+                swal("¡Error al Desvincular el usuario!", "Recarga la página y vuelve a intentarlo", "error")
+
+            }
+        }
+      }
+    xhttp.open("GET", "controller/desvincular-usuario.php?id=" + a, true);
+    xhttp.send();
 
 	} else {
 

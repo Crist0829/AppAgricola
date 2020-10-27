@@ -119,7 +119,14 @@ function cargarContenido(){
                 case 5:
                     require_once("view/html/usuario-editor/administrar-usuarios.html");
                 break;
+
+                case 6:
+                    require_once("view/html/usuario-editor/agregar-planilla.html");
+                break;
                 
+                case 7:
+                    require_once("view/html/usuario-editor/planilla.html");
+                break;
 
             }
 
