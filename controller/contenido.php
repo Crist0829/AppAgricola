@@ -128,6 +128,15 @@ function cargarContenido(){
                     require_once("view/html/usuario-editor/planilla.html");
                 break;
 
+                case 8:
+                    require_once("view/html/usuario-editor/historial-planilla.html");
+                break;
+
+                case 9:
+                    require_once("view/html/usuario-editor/estructura-planilla.html");
+                break;
+
+
             }
 
         break;

@@ -72,7 +72,7 @@ if(isset($_GET["nombre"]) && isset($_GET["ncolumnas"]) && isset($_GET["frecuenci
             <div class='form-group'>
                 
             <label for='".$tipo."'>TIPO DE INFORMACIÓN:</label>
-                <select name='".$tipo." id='".$tipo."' class='form-control'>
+                <select name='".$tipo."' id='".$tipo."' class='form-control'>
                     <option value = 'texto'>Texto</option>
                     <option value = 'numero'>Número</option>
                     <option value = 'imagen'>Imágen</option>
@@ -102,12 +102,12 @@ if(isset($_GET["nombre"]) && isset($_GET["ncolumnas"]) && isset($_GET["frecuenci
 
         <div class = 'registro-2'>
             <p class = 'text-center p-per'> <strong> NOMBRE: </strong></p>
-            <p class = 'text-center texto-verde'><strong> ".$nombre_planilla." </strong></p>
+            <p class = 'text-center texto-verde' id = 'nombrePlanilla'><strong>".$nombre_planilla."</strong></p>
         </div>
 
         <div class = 'registro-2'>
             <p class = 'text-center p-per'> <strong> REGISTRO: </strong></p>
-            <p class = 'text-center texto-verde'><strong> ".$nombre_registro."</strong></p>
+            <p class = 'text-center texto-verde' id = 'nombreRegistro'><strong>".$nombre_registro."</strong></p>
         </div>
 
         <div class = 'registro-2'>
@@ -117,12 +117,12 @@ if(isset($_GET["nombre"]) && isset($_GET["ncolumnas"]) && isset($_GET["frecuenci
         
         <div class = 'registro-2'>
             <p class = 'text-center p-per'> <strong> FECHA DE CREACIÓN: </strong></p>
-            <p class = 'text-center texto-verde'><strong> ".$fecha."</strong></p>
+            <p class = 'text-center texto-verde' id = 'fecha'><strong>".$fecha."</strong></p>
         </div>
 
         <div class = 'registro-2'>
             <p class = 'text-center'> <strong> FRECUENCA CON QUE LA QUE DEBE LLENAR: </strong></p>
-            <p class = 'text-center texto-verde'><strong> ".strtoupper($frecuencia)."</strong></p>
+            <p class = 'text-center texto-verde' id = 'frecuenciaValor'><strong> ".strtoupper($frecuencia)."</strong></p>
         </div>
 
         ".notasObservaciones()."

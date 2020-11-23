@@ -41,6 +41,7 @@ function fNombre(){
                 aux_n = 1;
 
             }else{
+
                 document.getElementById("enombre").setAttribute("class", "p-per-3")
                 document.getElementById("enombre").innerHTML = "Ya has creado una planilla con ese nombre, intenta con otro."
                 aux_n = 0;
@@ -48,7 +49,7 @@ function fNombre(){
         }
       }
     }
-    xhttp.open("GET", "controller/consultar-planilla.php?nombre = " + nombre, true);
+    xhttp.open("GET", "controller/consultar-planilla.php?nombre="+nombre, true);
     xhttp.send();
 
     }
@@ -117,7 +118,7 @@ function generarPlanilla(){
         }
       }
     }
-        xhttp.open("GET", "controller/generar-planilla.php?nombre=" + nombre + "&ncolumnas=" + ncolumnas + "&frecuencia=" + frecuencia + "&observaciones=" + observaciones, true);
+        xhttp.open("GET", "controller/generar-planilla.php?nombre="+nombre +"&ncolumnas="+ncolumnas+"&frecuencia="+frecuencia+"&observaciones="+observaciones, true);
         xhttp.send();
        
 }
@@ -158,6 +159,12 @@ function nombreColumna(a){
 /*Esta funcioón es la que guarda la planilla en la base de datos */
 function guardarPlanilla(n){
 
+    let nombreRegistro = document.getElementById("nombreRegistro").textContent
+    let nombrePlanilla = document.getElementById("nombrePlanilla").textContent
+    let fecha = document.getElementById("fecha").textContent
+    let frecuencia = document.getElementById("frecuenciaValor").textContent
+    let observaciones = document.getElementById("observaciones").value
+    
     //el párametro n es el número columnas que se generó en la plantilla
     //se utilizará iterar sobre cada validación
  
@@ -177,7 +184,13 @@ function guardarPlanilla(n){
     }else {
 
 
-        let url = "controller/guardar-planilla.php?" 
+        var url = "controller/guardar-planilla.php?ncolumnas="+n+"&nombre_registro="+nombreRegistro+"&nombre_planilla="+nombrePlanilla+"&fecha="+fecha+"&frecuencia="+frecuencia+"&"
+
+        if(observaciones != ""){
+
+            url += "observaciones="+observaciones+"&"
+
+        }
 
         for(let i = 1; i <= n; i ++){
 
@@ -185,24 +198,31 @@ function guardarPlanilla(n){
             let nombre = document.getElementById(idNombre).value
 
             let idTipo  = "t" + i
-            let tipo = document.getElementById(idTipo)
+            let tipo = document.getElementById(idTipo).value
            
             url += idNombre + "=" + nombre + "&" + idTipo + "=" + tipo + "&"
         }
-
-        alert(url)
 
         var xhttp = new XMLHttpRequest();
 
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 
-            planillaGenerada.innerHTML = this.responseText
+            let prueba = parseInt(this.responseText)
 
+            if(prueba == 1){
+
+                swal("¡PLANILLA GUARDADA CORRECTAMENTE!", "La planilla se guardó correctamente.", "success")
+
+            }else{
+
+                swal("ERROR AL CREAR LA PLANILLA", "Ocurrió un error al crear la planilla, intentalo nuevamente.", "error")
+
+            }
         }
       }
     }
-        xhttp.open("GET", "controller/guardar-planilla.php?nombre=" + nombre + "&ncolumnas=" + ncolumnas + "&frecuencia=" + frecuencia + "&observaciones=" + observaciones, true);
+        xhttp.open("GET", url , true);
         xhttp.send();
        
 

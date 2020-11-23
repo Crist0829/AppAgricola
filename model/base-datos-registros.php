@@ -33,6 +33,30 @@ class ConexionRegistro{
 
 class Registro extends ConexionRegistro{
 
+    public function consultarNombreTabla($nombre){
+
+        $this->consulta = "SHOW TABLES LIKE ?";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+       
+        $resultado->bindValue(1, $nombre, PDO::PARAM_STR);
+        $resultado->execute();
+
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+
+    }
+
     public function consultarNombreRegistro($nombre){
 
         $this->consulta = "SHOW TABLES LIKE ?";
@@ -187,12 +211,13 @@ class Registro extends ConexionRegistro{
 class Planilla extends ConexionRegistro{
 
 
-    public function consultarPlanilla($identificador){
+    public function consultarPlanillas($identificador, $nombre){
 
-        $this->consulta = "SELECT * FROM planillas_base WHERE identificador = :identificador";
+        $this->consulta = "SELECT * FROM planillas_base WHERE identificador = :identificador AND nombre_registro = :nombre";
 
         $resultado = $this->conexion_db->prepare($this->consulta);
         $resultado->bindValue(":identificador", $identificador);
+        $resultado->bindValue(":nombre", $nombre);
         $resultado->execute();
 
         if($resultado->rowCount()){
@@ -206,18 +231,38 @@ class Planilla extends ConexionRegistro{
 
         }
 
-        
-
-
 
     }
 
-    public function cargarPlanilla($identificador){
+    public function consultarNombrePlanilla($nombre, $nombre_registro){
 
-        $this->consulta = "SELECT * FROM planillas_base WHERE identificador = :identificador";
+        $this->consulta = "SELECT * FROM planillas_base WHERE nombre = :nombre AND nombre_registro = :nombre_registro";
 
-        $resultado = $this->registro->prepare($this->consulta);
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":nombre", $nombre);
+        $resultado->bindValue(":nombre_registro", $nombre_registro);
+        $resultado->execute();
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+            $resultado->closeCursor();
+            return 0;
+
+        }
+
+    }
+
+    public function cargarPlanillas($identificador, $nombre){
+
+        $this->consulta = "SELECT * FROM planillas_base WHERE identificador = :identificador and nombre_registro = :nombre";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
         $resultado->bindValue(":identificador", $identificador);
+        $resultado->bindValue(":nombre", $nombre);
         $resultado->execute();
 
         if($resultado->rowCount()){
@@ -237,6 +282,34 @@ class Planilla extends ConexionRegistro{
 
 
     }
+
+    public function cargarPlanilla($nombre_registro, $nombre_planilla){
+
+        $this->consulta = "SELECT * FROM planillas_base WHERE nombre = :nombre_planilla and nombre_registro = :nombre_registro";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":nombre_planilla", $nombre_planilla);
+        $resultado->bindValue(":nombre_registro", $nombre_registro);
+        $resultado->execute();
+
+        if($resultado->rowCount()){
+            
+            $this->registro = $resultado->fetch(PDO::FETCH_ASSOC);
+            $resultado->closeCursor();
+            return $this->registro;
+
+        }else{
+
+            return 0;
+
+        }
+
+        
+
+
+
+    }
+
 
     public function consultarPlanillaTabla($nombre){
 
@@ -262,8 +335,78 @@ class Planilla extends ConexionRegistro{
 
     }
 
+    public function crearTabla($consulta){
+
+        $this->consulta = $consulta;
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute();
+        $resultado->closeCursor();
+        return 1;
 
 
+    }
+
+    public function insertarPlanilla($nombre, $nombre_registro, $identificador, $fecha, $observaciones, $frecuencia, $ncolumnas, $texto, $numero, $imagen){
+
+
+        $this->consulta = "INSERT INTO planillas_base (nombre, nombre_registro, identificador, fecha, observaciones, frecuencia, ncolumnas, texto, numero, imagen) 
+                                  values (:nombre, :nombre_registro, :identificador, :fecha, :observaciones, :frecuencia, :ncolumnas, :texto, :numero, :imagen)";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute(array(":nombre"=>$nombre, ":nombre_registro" => $nombre_registro, ":identificador"=>$identificador,
+                                  ":fecha" => $fecha, ":observaciones" => $observaciones, ":frecuencia" => $frecuencia, ":ncolumnas" => $ncolumnas,
+                                ":texto" => $texto, ":numero" => $numero, ":imagen" => $imagen));
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+
+
+    }
+
+    public function nombresColumna($nombre_planilla_tabla){
+
+        $this->consulta = "SHOW COLUMNS FROM $nombre_planilla_tabla";
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute();
+
+        $this->registro = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        $resultado->closeCursor();
+        return $this->registro;
+
+
+    }
+
+    public function cargarRegistroPlanilla($nombre_planilla_tabla){
+
+        $this->consulta = "SELECT * FROM $nombre_planilla_tabla";
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute();
+
+        if($resultado->rowCount()){
+
+            $this->registro = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $resultado->closeCursor();
+            return $this->registro;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+
+    }
 
 
 }

@@ -10,6 +10,7 @@ if(isset($_POST["clave"]) && isset($_POST["nombre"])){
     session_start();
 
     $nombre = $_POST["nombre"];
+    $nombre = strtolower($nombre);
     $clave = htmlentities(addslashes($_POST["clave"]));
     $consultar = new Consultar();
 

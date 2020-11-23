@@ -8,6 +8,8 @@ if(isset($_SESSION["nombre_registro"])){
     $nombre_registro_normal = $_SESSION["nombre_registro"];
     $nombre_registro_tabla = str_replace(" ", "_", $nombre_registro_normal);
     $nombre_registro_tabla = $nombre_registro_tabla."_".$_SESSION["identificador"];
+    $nombre_registro = strtolower($nombre_registro_normal);
+    $nombre_registro_tabla = strtolower($nombre_registro_tabla);
     $registro = new Registro();
 
     if($registro->consultarNombreRegistro($nombre_registro_tabla)){
