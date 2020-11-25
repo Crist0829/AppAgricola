@@ -108,7 +108,6 @@ class Consultar extends Conexion{
 
     }
 
-
     public function consultarNombreTemp($nombre){
 
         $this->consulta = "SELECT * FROM usuarios_temp where nombre = :nombre";
@@ -218,7 +217,6 @@ class Consultar extends Conexion{
         return $this->registro;
 
     }
-
 
 }
 

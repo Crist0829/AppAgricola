@@ -3,9 +3,6 @@
 require_once("../model/base-datos-registros.php");
 session_start();
 
-
-
-
 if(isset($_GET["ncolumnas"]) && isset($_GET["nombre_registro"]) && isset($_GET["nombre_planilla"]) && 
     isset($_GET["fecha"]) && isset($_GET["frecuencia"]) ){
 
@@ -32,6 +29,8 @@ if(isset($_GET["ncolumnas"]) && isset($_GET["nombre_registro"]) && isset($_GET["
 
 
 
+    /*Esta función genera la consulta que generará la tabla (planilla) 
+    que se guardará en la base de datos*/
 
     function generarConsulta($tabla, $nombre_planilla_tabla){
         global $texto, $numero, $imagen;
@@ -62,13 +61,10 @@ if(isset($_GET["ncolumnas"]) && isset($_GET["nombre_registro"]) && isset($_GET["
     
         $aux = substr($aux, 0, -1);
     
-        $consulta = "CREATE TABLE $nombre_planilla_tabla (usuario int(15), fecha varchar(10), $aux)";
+        $consulta = "CREATE TABLE $nombre_planilla_tabla (usuario varchar(60), fecha varchar(10), $aux)";
     
         return $consulta;
     }
-
-
-
 
     if(isset($_GET["observaciones"])){
 
@@ -118,22 +114,6 @@ if(isset($_GET["ncolumnas"]) && isset($_GET["nombre_registro"]) && isset($_GET["
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ?>

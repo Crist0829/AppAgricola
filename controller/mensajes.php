@@ -1,6 +1,6 @@
 <?php 
 
-/*este archivo es cargado al iniciio y muestra mensajes de error dependiendo el caso*/
+/*este archivo es cargado al iniciio y muestra mensajes de error o éxito dependiendo el caso*/
 
 if(isset($_GET["mensaje"])){
 
@@ -90,11 +90,23 @@ if(isset($_GET["mensaje"])){
 
             window.onload=function() {
                 
-                swal('¡REGISTRO CREADO!', 'Creaste el registro correctamente, dirígete a MIS REGISTROS para administrarlo', 'success');
+                swal('¡REGISTRO CREADO!', 'Creaste el registro correctamente, ya puedes agregar planillas y conectar usuarios', 'success');
             }
             </script>";
 
-        }/* else if($_GET["mensaje"] == 10){
+        }else if($_GET["mensaje"] == 10){
+
+            echo "<script>
+
+            window.onload=function() {
+                
+                swal('¡REGISTRO ELIMINADO!', 'EL REGISTRO SE ELIMINÓ CORRECTAMENTE', 'success');
+            }
+            </script>";
+            
+        }
+            
+            /* else if($_GET["mensaje"] == 10){
 
             echo "<script>
 

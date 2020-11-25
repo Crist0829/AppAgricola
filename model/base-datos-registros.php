@@ -206,6 +206,192 @@ class Registro extends ConexionRegistro{
 
 
     }
+
+    public function desvincularUsuarioUB($identificador_usuario, $identificador_editor, $nombre_registro){
+
+        $this->consulta = "DELETE FROM usuarios_base WHERE identificador_usuario = :identificador_usuario AND identificador_editor = :identificador_editor
+                            AND nombre_registro = :nombre_registro";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute(array(":identificador_usuario" => $identificador_usuario,
+                                  ":identificador_editor" => $identificador_editor,
+                                  ":nombre_registro" => $nombre_registro));
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+
+
+    }
+
+
+    public function conectarUsuarioUB($nombre_usuario, $identificador_usuario, $nombre_editor, $identificador_editor, $nombre_registro){
+
+        $this->consulta = "INSERT INTO usuarios_base (nombre_usuario, identificador_usuario, nombre_editor, identificador_editor, nombre_registro) 
+        VALUES (:nombre_usuario, :identificador_usuario, :nombre_editor, :identificador_editor, :nombre_registro)";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute(array(":nombre_usuario" => $nombre_usuario, ":identificador_usuario" => $identificador_usuario,
+         ":nombre_editor" => $nombre_editor, ":identificador_editor"  => $identificador_editor, ":nombre_registro"=> $nombre_registro));
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+    }
+
+    public function extraerPlanillas($nombre_registro, $identificador){
+
+        $this->consulta = "SELECT nombre FROM planillas_base WHERE nombre_registro = :nombre_registro AND identificador = :identificador";
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":nombre_registro", $nombre_registro);
+        $resultado->bindValue(":identificador", $identificador);
+        $resultado->execute();
+
+        $this->registro = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->registro;
+
+    }
+
+    public function eliminarRegistro($nombre_registro, $identificador){
+
+        $this->consulta = "DELETE FROM registros_base where nombre = :nombre AND identificador = :identificador";
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":nombre", $nombre_registro);
+        $resultado->bindValue(":identificador", $identificador);
+        $resultado->execute();
+
+    }
+
+    public function eliminarRegistroUB($nombre_registro, $identificador){
+
+        $this->consulta = "DELETE FROM usuarios_base where nombre_registro = :nombre_registro AND identificador_editor = :identificador";
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":nombre_registro", $nombre_registro);
+        $resultado->bindValue(":identificador", $identificador);
+        $resultado->execute();
+
+    }
+
+    public function eliminarRegistroTabla($nombre_registro_tabla){
+
+        $this->consulta = "DROP TABLE $nombre_registro_tabla";
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute();
+
+    }
+
+    public function consultarUsuarioComun($nombre_usuario){
+
+        $this->consulta = "SELECT * FROM usuarios_base where nombre_usuario = :nombre_usuario";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":nombre_usuario", $nombre_usuario);
+        $resultado->execute();
+
+        $this->registro = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+    }
+
+    public function consultarUsuarioEditor($nombre_usuario, $nombre_editor, $nombre_registro){
+
+        $this->consulta = "SELECT * FROM usuarios_base where nombre_usuario = :nombre_usuario AND nombre_editor = :nombre_editor AND nombre_registro = :nombre_registro";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":nombre_usuario", $nombre_usuario);
+        $resultado->bindValue(":nombre_editor", $nombre_editor);
+        $resultado->bindValue("nombre_registro", $nombre_registro);
+        $resultado->execute();
+
+        $this->registro = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+    }
+
+    public function actualizarImagen($nombre_registro_tabla, $nombre, $rutaimagen){
+
+        $this->consulta = "UPDATE $nombre_registro_tabla SET imagen = :imagen WHERE nombre = :nombre";
+
+        $resultado = $this->conexion_db->prepare($this->consulta);
+
+        $resultado->execute(array(":imagen" => $rutaimagen, ":nombre" => $nombre));
+
+        if($resultado->rowCount() > 0){
+
+            $resultado->closeCursor(); 
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+
+        }
+
+
+
+    }
+
+    public function eliminarImagen($nombre_registro_tabla, $nombre){
+
+        $this->consulta = "UPDATE $nombre_registro_tabla SET imagen = NULL where nombre = :nombre";
+        
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":nombre", $nombre);
+        $resultado->execute();
+
+
+        if($resultado->rowCount()){
+
+            $resultado->closeCursor();
+            return 1;
+
+        }else{
+
+            $resultado->closeCursor();
+            return 0;
+    
+        }
+    }
+
+
 }
 
 class Planilla extends ConexionRegistro{
@@ -310,7 +496,6 @@ class Planilla extends ConexionRegistro{
 
     }
 
-
     public function consultarPlanillaTabla($nombre){
 
         $this->consulta = "SHOW TABLES LIKE ?";
@@ -407,6 +592,51 @@ class Planilla extends ConexionRegistro{
         }
 
     }
+
+    public function cargarUsuarios($nombre_registro){
+
+        $this->consulta = "SELECT nombre from $nombre_registro";
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute();
+
+        $this->registro = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->registro;
+
+
+    }
+
+    public function cargarContenido($nombre_planilla_tabla, $nombre_usuario){
+
+        $this->consulta = "SELECT * from $nombre_planilla_tabla WHERE usuario = :usuario";
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->bindValue(":usuario", $nombre_usuario);
+        $resultado->execute();
+
+        $this->registro = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->registro;
+
+
+    }
+
+    public function eliminarPlanilla($nombre_planilla, $nombre_registro, $identificador){
+
+        $this->consulta = "DELETE FROM planillas_base where nombre = :nombre_planilla AND nombre_registro = :nombre_registro AND identificador = :identificador ";
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute(array(":nombre_planilla" => $nombre_planilla, "nombre_registro" => $nombre_registro,
+                                ":identificador" => $identificador));
+
+    }
+
+    public function eliminarPlanillaTabla($nombre_planilla_tabla){
+
+        $this->consulta = "DROP TABLE $nombre_planilla_tabla";
+        $resultado = $this->conexion_db->prepare($this->consulta);
+        $resultado->execute();
+
+    }
+
 
 
 }

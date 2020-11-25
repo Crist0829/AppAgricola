@@ -1,6 +1,7 @@
 <?php 
 
 require_once("../model/base-datos.php");
+require_once("../model/base-datos-registros.php");
 
 session_start();
 
@@ -14,6 +15,19 @@ if($_SESSION["imagen"] !== null){
     $eliminar = new Actualizar();
 
     if($eliminar->eliminarImagen($nombre)){
+
+        $registro = new Registro();
+
+        if($registro->consultarUsuarioComun($nombre)){
+
+            foreach($registro->registro as $reg);
+
+            $nombre_registro_tabla = $reg["nombre_registro"]."_".$reg["identificador_editor"];
+            $nombre_registro_tabla = str_replace(" ", "_", $nombre_registro_tabla);
+
+            $registro->eliminarImagen($nombre_registro_tabla, $nombre);
+
+        }
 
         if(isset($_COOKIE["imagen"])){
 

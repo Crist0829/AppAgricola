@@ -24,7 +24,6 @@ if(isset($_GET["nombre_planilla"]) && isset($_GET["nombre_registro"])){
 
         foreach($nombres_columna as $nombres){
 
-
             $aux .= "<th>".$nombres["Field"]."</th>"; 
 
         }
@@ -42,6 +41,7 @@ if(isset($_GET["nombre_planilla"]) && isset($_GET["nombre_registro"])){
         $aux_2 = "";
         $aux_3 = "";
         $aux_4 = "";
+
         foreach($nombres_columna as $nombres){
             
             $nombre[$aux] = $nombres["Field"];
@@ -69,7 +69,6 @@ if(isset($_GET["nombre_planilla"]) && isset($_GET["nombre_registro"])){
             
             $aux_3 = "<tr> $aux_2 </tr>";
             $aux_4 .= $aux_3;
-
             $aux_2 = "";
 
         }
@@ -97,15 +96,11 @@ if(isset($_GET["nombre_planilla"]) && isset($_GET["nombre_registro"])){
     <table>
     <div>";
 
-    
-    
-
-
   }else{
 
     echo "<div>
     
-        HA HABIDO UN PROBLEMA CON LA CONEXIÓN EN LA BASE DE DATOS, RECARGA LA PÁGINA Y VUELVE A INTENTARLO  
+        HUBO UN PROBLEMA CON LA CONEXIÓN EN LA BASE DE DATOS, RECARGA LA PÁGINA. 
     
     <div>
     ";
@@ -118,20 +113,12 @@ if(isset($_GET["nombre_planilla"]) && isset($_GET["nombre_registro"])){
 
     echo "<div>
     
-    NO SE HA CARGADO LA INFORMACIÓN
+    NO SE HA CARGADO LA INFORMACIÓN, RECARGA LA PÁGINA. 
     
     <div>
     ";
 
 }
-
-
-
-
-
-
-
-
 
 
 

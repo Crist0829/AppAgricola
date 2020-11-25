@@ -53,67 +53,37 @@
                                     <a href="index.php?pagina=0">Inicio</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <i data-feather="layers"></i> <a href="index.php?pagina=1">Mis registros</a> 
-                                </li>
-                                <li class="breadcrumb-item">
-                                    <i data-feather="file-text"></i> <a href="index.php?pagina=1">planilla</a> 
+                                    <i data-feather="layers"></i> <a href="index.php?pagina=1">Registros</a> 
                                 </li>
 
                             </ol>
                         </nav>
                     </div>
                 </div>
-                <h1 class= "card-title texto-verde" id='nombreRegistro'><?php echo strtoupper($_GET["nombre_registro"]) ?></h1>
-                <h5 class= "card-title" id = "nombrePlanilla"><?php echo strtoupper($_GET["nombre_planilla"]) ?></h5>
-                <br>
-                
+
     <div class="row">
-
         <div class="col-md-12">
-            <div class = 'registro col-md-6'>
-                <div class='btn-group'>
-                    <button type='button' class='btn btn-light-primary'><h4>INFORMACIÓN</h4></button>
-                    
-                </div>
-        
-                <div id='infoPlanilla'>
-                
-                
-                </div>
-                
-            </div>
+
             <div class="card">
                 
+                <div class="card-body">
+                    <h5 class="card-title texto-verde">Registros <i data-feather="layers"></i></h5>
+
+                    <p>En esta página podrás ver los registros a los que estás conectado
+                        y podrás llenar las planillas que el editor creó.
+                    </p>
+
+                    <div id="registros">
+
+                        
+
+
+                    </div>
+
+                </div>
                 
             </div>
         </div>
-
-        
-
-        <div class="col-md-12">
-            <div class = 'registro col-md-6'>
-                <div class='btn-group'>
-                    <button type='button' class='btn btn-light-primary'><h4 class="text-center">ACCIONES</h4></button>
-                    
-                </div>
-        
-                <div>
-                <ul class='list-group'>
-                    <li class='list-group-item'><a href=<?php echo "index.php?pagina=8&nombre_registro=".str_replace(' ', '%20', $_GET['nombre_registro'])."&nombre_planilla=".str_replace(' ', '%20', $_GET['nombre_planilla']); ?> class="btn btn-outline-primary btn-sm">VER HISTORIAL</a></li>
-                    <li class='list-group-item'><a href=<?php echo "index.php?pagina=9&nombre_registro=".str_replace(' ', '%20', $_GET['nombre_registro'])."&nombre_planilla=".str_replace(' ', '%20', $_GET['nombre_planilla']); ?> class="btn btn-outline-primary btn-sm">DESCARGAR HISTORIAL</a></li>
-                    <li class='list-group-item'><a id="eliminarPlanilla" class="btn btn-outline-dark btn-sm" onclick="eliminar();">ELIMINAR PLANILLA</a></li>
-                </ul>
-        
-                </div>
-                
-            </div>
-            <div class="card">
-                
-                
-            </div>
-        </div>
-
-        
     </div>
 
             </div>
@@ -132,7 +102,7 @@
 </div>
 <!-- ./ Layout wrapper -->
 
-<script src="view/assets/js/planilla.js"></script>
+<script src="view/assets/js/cargar-registros-comun.js"></script>
 
 <!-- Main scripts -->
 <script src="view/vendors/bundle.js"></script>

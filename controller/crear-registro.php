@@ -28,7 +28,7 @@ if(isset($_POST["clave"]) && isset($_POST["nombre"])){
 
         if($crear_registro->crearTabla($nombre_registro) && $crear_registro->insertarRegistro($nombre, $_SESSION["identificador"])){
 
-            header("location: ../index.php?pagina=2&mensaje=9");
+            header("location: ../index.php?pagina=1&mensaje=9");
 
         }else{
 
@@ -51,28 +51,5 @@ if(isset($_POST["clave"]) && isset($_POST["nombre"])){
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>

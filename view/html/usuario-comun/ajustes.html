@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App Agricola</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="view/assets/media/image/favicon.png"/>
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="view/vendors/bundle.css" type="text/css">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- App css -->
+
+    <link rel="stylesheet" href="view/assets/css/app.min.css" type="text/css">
+
+</head>
+
+<body class="hidden-navigation">
+
+<!-- Precargador -->
+<div class="preloader">
+    <div class="preloader-icon"></div>
+    <span>cargando</span>
+</div>
+<!-- ./ Precarcador-->
+
+
+<!-- Layout wrapper -->
+<div class="layout-wrapper">
+
+    
+
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+
+        <!-- Content body -->
+        <div class="content-body">
+            <!-- Content -->
+            <div class="content ">
+                
+                <div class="page-header">
+                    <div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+
+                                <li class="breadcrumb-item">
+                                    <a href="index.php?pagina=0"><small>Inicio</small></a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <i data-feather="settings"></i> <a href="index.php?pagina=2"> <small>Ajustes</small></a> 
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+<div class="ajustes">
+
+    <div class="d-flex justify-content-center">
+
+        <div class="card-per">
+            <h5 class="texto-gris text-center">IMAGEN</h5>
+            <figure><img  width="100" src=<?php cargarImagen() ?>></figure>
+
+        </div>
+        
+
+    
+    </div>
+
+</div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card">
+                
+                <div class="card-body">
+                  
+                    <div class="text-center">
+                        <h3>
+                            <?php echo $_SESSION["nombre"]?>
+                        </h3>
+
+                    </div>
+
+                    <hr>
+
+                    <div id="c_ajustes">
+
+                        <p class="p-per">Cuenta: <strong class="texto-verde">COMÚN</strong></p>
+
+                        <p class="p-per">
+                          Correo: <strong class="texto-verde"> <?php echo $_SESSION["correo"]?> </strong>
+                        </p>
+
+                        <p class="">
+                            ID: <strong class="texto-verde"> <?php echo $_SESSION["identificador"]?>  </strong>
+                        </p>
+                        
+
+                    </div>
+
+                    <a href="index.php?pagina=4"><button class="btn btn-primary btn-sm">ADMINISTRAR CUENTA</button></a>
+                </div>
+                
+            </div>
+            <hr>
+
+            <p class="text-center"><a href="controller/destruye-cookies-sesiones.php" class="btn btn-primary btn-pulse text-center">CERRAR SESIÓN</a></p>
+
+        </div>
+    </div>
+
+            </div>
+            <!-- ./ Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer">
+                <div>© 2020 APP agrícola - <a href="#" target="_blank">App Agrícola</a></div>
+
+            </footer>
+            <!-- ./ Footer -->
+        </div>
+        <!-- ./ Content body -->
+    </div>
+    <!-- ./ Content wrapper -->
+</div>
+<!-- ./ Layout wrapper -->
+
+<!-- Main scripts -->
+<script src="view/vendors/bundle.js"></script>
+
+
+<!-- App scripts -->
+<script src="view/assets/js/app.min.js"></script>
+</body>
+
+</html>

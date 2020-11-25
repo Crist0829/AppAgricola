@@ -52,68 +52,65 @@
                                 <li class="breadcrumb-item">
                                     <a href="index.php?pagina=0">Inicio</a>
                                 </li>
+
                                 <li class="breadcrumb-item">
                                     <i data-feather="layers"></i> <a href="index.php?pagina=1">Mis registros</a> 
                                 </li>
+
                                 <li class="breadcrumb-item">
-                                    <i data-feather="file-text"></i> <a href="index.php?pagina=1">planilla</a> 
+                                    <i data-feather="trash"></i> <a href="index.php?pagina=3">Eliminar registro</a> 
                                 </li>
 
                             </ol>
                         </nav>
                     </div>
                 </div>
-                <h1 class= "card-title texto-verde" id='nombreRegistro'><?php echo strtoupper($_GET["nombre_registro"]) ?></h1>
-                <h5 class= "card-title" id = "nombrePlanilla"><?php echo strtoupper($_GET["nombre_planilla"]) ?></h5>
-                <br>
-                
+
     <div class="row">
-
         <div class="col-md-12">
-            <div class = 'registro col-md-6'>
-                <div class='btn-group'>
-                    <button type='button' class='btn btn-light-primary'><h4>INFORMACIÓN</h4></button>
-                    
-                </div>
-        
-                <div id='infoPlanilla'>
-                
-                
-                </div>
-                
-            </div>
+
             <div class="card">
                 
+                <div class="card-body">
+                    <h1 class="card-title texto-verde">ELIMINAR REGISTRO</h1>
+                    <h3 class='card-title texto-gris'><?php echo isset($_GET["nombre_registro"]) ? strtoUpper($_GET["nombre_registro"]): ""  ?></h3>
+                   
+                    <div class="registro-2 col-md-6">
+                    <hr>
+                    <p class="p-per text-center">Al eliminar un registro se borrará permanentemente de la base de datos
+                        incluyendo las planillas y los usuarios conectados a éste, antes de proceder le recomendamos 
+                        que descargue el historial de las planillas para que al menos tenga un respaldo de la información. 
+
+                        <strong class="texto-rojo">Esta acción no se puede revertir</strong> 
+                    </p>
+                    </div>
+
+                    <div class="registro-2 col-md-6">
+                    <h5 class="text-center">ELIMINAR</h5>
+                    <hr>
+                    
+                    <form onsubmit="return validar()" method="POST" action=<?php echo "controller/eliminar-registro.php?nombre_registro=".str_replace(" ", "%20", $_GET["nombre_registro"]) ?>>
+                          
+                        
+                        <div class="form-group">
+
+                            <label>Escribe tu contraseña para confirmar:</label>
+                            <input type="password" name="clave" id="clave" class="form-control" required>
+                            <hr>
+
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-block" value="ELIMINAR REGISTRO">
+                        </div>
+                            
+                    </form>
+                </div>
+
+                </div>
                 
             </div>
         </div>
-
-        
-
-        <div class="col-md-12">
-            <div class = 'registro col-md-6'>
-                <div class='btn-group'>
-                    <button type='button' class='btn btn-light-primary'><h4 class="text-center">ACCIONES</h4></button>
-                    
-                </div>
-        
-                <div>
-                <ul class='list-group'>
-                    <li class='list-group-item'><a href=<?php echo "index.php?pagina=8&nombre_registro=".str_replace(' ', '%20', $_GET['nombre_registro'])."&nombre_planilla=".str_replace(' ', '%20', $_GET['nombre_planilla']); ?> class="btn btn-outline-primary btn-sm">VER HISTORIAL</a></li>
-                    <li class='list-group-item'><a href=<?php echo "index.php?pagina=9&nombre_registro=".str_replace(' ', '%20', $_GET['nombre_registro'])."&nombre_planilla=".str_replace(' ', '%20', $_GET['nombre_planilla']); ?> class="btn btn-outline-primary btn-sm">DESCARGAR HISTORIAL</a></li>
-                    <li class='list-group-item'><a id="eliminarPlanilla" class="btn btn-outline-dark btn-sm" onclick="eliminar();">ELIMINAR PLANILLA</a></li>
-                </ul>
-        
-                </div>
-                
-            </div>
-            <div class="card">
-                
-                
-            </div>
-        </div>
-
-        
     </div>
 
             </div>
@@ -132,7 +129,7 @@
 </div>
 <!-- ./ Layout wrapper -->
 
-<script src="view/assets/js/planilla.js"></script>
+<script src="view/assets/js/eliminar-registro.js"></script>
 
 <!-- Main scripts -->
 <script src="view/vendors/bundle.js"></script>

@@ -7,6 +7,7 @@ session_start();
 if(isset($_POST["id"]) && isset($_POST["clave"]) && isset($_SESSION["nombre_registro"])){
     
     $identificador = $_POST["id"];
+    $nombre_editor = $_SESSION["nombre"];
     $clave = htmlentities(addslashes($_POST["clave"]));
     $identi_editor = $_SESSION["identificador"];
     $nombre_registro = $_SESSION["nombre_registro"];
@@ -34,41 +35,41 @@ if(isset($_POST["id"]) && isset($_POST["clave"]) && isset($_SESSION["nombre_regi
             if($registro->conectarUsuario($nombre_registro_tabla, $datos_usuario["nombre"], $datos_usuario["identificador"], 
             $datos_usuario["correo"], $datos_usuario["imagen"])){
 
+                if($registro->conectarUsuarioUB($datos_usuario["nombre"], $identificador, $nombre_editor, $identi_editor, $nombre_registro)){
 
-                header("location: ../index.php?pagina=5&mensaje=13");
+
+                    header("location: ../index.php?pagina=5&mensaje=13");
+
+
+                }else{
+
+
+                    header("location: ../index.php?pagina=5&mensaje=11");
+
+                }
+
 
             }
 
 
         }else{
 
-            header("location: ../index.php?pagina=5&mensaje=11");
+            header("location: ../index.php?mensaje=11&pagina=5");
 
         }
 
     }else{
 
-        header("location: ../index.php?pagina=5&mensaje=11");
+        header("location: ../index.php?mensaje=11&pagina=5");
 
     }
 
 }else{
 
-    header("location: ../index.php?pagina=5&mensaje=10");
+    header("location: ../index.php?mensaje=10&pagina=5");
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

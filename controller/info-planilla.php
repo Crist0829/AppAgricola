@@ -69,13 +69,4 @@ if(isset($_GET["nombre_planilla"]) && isset($_GET["nombre_registro"])){
 }
 
 
-
-
-
-
-
-
-
-
-
 ?>

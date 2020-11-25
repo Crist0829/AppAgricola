@@ -1,6 +1,8 @@
 window.onload = function (){
 
+    let llenarPlanilla = document.getElementById("llenarPlanilla")
     let infoPlanilla = document.getElementById("infoPlanilla")
+    let nombreEditor = document.getElementById("nombreEditor").textContent
     let nombrePlanilla =  document.getElementById("nombrePlanilla").textContent
     let nombreRegistro = document.getElementById("nombreRegistro").textContent
 
@@ -24,26 +26,19 @@ window.onload = function (){
     xhttp.send();
 
 
-}
+    var xhttp2 = new XMLHttpRequest();
 
-function eliminar(){
+    xhttp2.onreadystatechange = function() {
 
-    let confirmar = confirm("¿Estás seguro de deseas eliminar la planilla?, toda la información se perderá y es una acción irreversible")
+        if (this.readyState == 4 && this.status == 200) {
 
-    if(confirmar == true){
-
-        let nombrePlanilla = document.getElementById("nombrePlanilla").textContent
-        let nombreRegistro = document.getElementById("nombreRegistro").textContent
-
-        nombreRegistro = nombreRegistro.toLocaleLowerCase()
-
-
-        nombrePlanilla = nombrePlanilla.toLowerCase()
-        nombrePlanilla = nombrePlanilla.replace(" ", "%20")
-
-        window.location.href = "controller/eliminar-planilla.php?nombre_planilla=" + nombrePlanilla + "&nombre_registro=" + nombreRegistro
-
-    }
-
+            llenarPlanilla.innerHTML = this.responseText;
+                
+        }
+      }
     
+    xhttp2.open("GET", "controller/llenar-planilla.php?nombre_registro="+nombreRegistro+"&nombre_planilla="+nombrePlanilla+"&nombre_editor="+nombreEditor, true);
+    xhttp2.send();
+
+
 }

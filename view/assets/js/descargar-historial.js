@@ -1,6 +1,6 @@
 window.onload = ()=>{
 
-    let historialPlanilla = document.getElementById("historialPlanilla")
+    let historialPlanilla = document.getElementById("estructuraPlanilla")
 
     let nombrePlanilla =  document.getElementById("nombrePlanilla").textContent
     let nombreRegistro = document.getElementById("nombreRegistro").textContent
@@ -19,7 +19,7 @@ window.onload = ()=>{
         }
       }
     
-    xhttp.open("GET", "controller/historial-planilla.php?nombre_registro="+nombreRegistro+"&nombre_planilla="+nombrePlanilla, true);
+    xhttp.open("GET", "controller/descargar-historial.php?nombre_registro="+nombreRegistro+"&nombre_planilla="+nombrePlanilla, true);
     xhttp.send();
 
 

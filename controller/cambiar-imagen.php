@@ -1,6 +1,7 @@
 <?php 
 
 require_once("../model/base-datos.php");
+require_once("../model/base-datos-registros.php");
 
 session_start();
 
@@ -50,6 +51,22 @@ if($tamano < 2000000){
         $actualizar = new Actualizar();
         
         if($actualizar->actualizarImagen($nombre, $ruta_imagen)){
+
+
+            $registro = new Registro();
+
+            if($registro->consultarUsuarioComun($nombre)){
+
+                foreach($registro->registro as $reg);
+
+                $nombre_registro_tabla = $reg["nombre_registro"]."_".$reg["identificador_editor"];
+                $nombre_registro_tabla = str_replace(" ", "_", $nombre_registro_tabla);
+
+                $registro->actualizarImagen($nombre_registro_tabla, $nombre, $ruta_imagen);
+
+            }
+
+
 
             //este es el bloque que elimina la imagen anterior//
             if(isset($_SESSION["imagen"]) !== null){

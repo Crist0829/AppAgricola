@@ -53,7 +53,7 @@
                                     <a href="index.php?pagina=0">Inicio</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <i data-feather="layers"></i> <a href="index.php?pagina=1">Mis registros</a> 
+                                    <i data-feather="layers"></i> <a href="index.php?pagina=1">Registros</a> 
                                 </li>
                                 <li class="breadcrumb-item">
                                     <i data-feather="file-text"></i> <a href="index.php?pagina=1">planilla</a> 
@@ -93,16 +93,13 @@
         <div class="col-md-12">
             <div class = 'registro col-md-6'>
                 <div class='btn-group'>
-                    <button type='button' class='btn btn-light-primary'><h4 class="text-center">ACCIONES</h4></button>
+                    <button type='button' class='btn btn-light-primary'><h4 class="text-center">LLENAR</h4></button>
                     
                 </div>
         
-                <div>
-                <ul class='list-group'>
-                    <li class='list-group-item'><a href=<?php echo "index.php?pagina=8&nombre_registro=".str_replace(' ', '%20', $_GET['nombre_registro'])."&nombre_planilla=".str_replace(' ', '%20', $_GET['nombre_planilla']); ?> class="btn btn-outline-primary btn-sm">VER HISTORIAL</a></li>
-                    <li class='list-group-item'><a href=<?php echo "index.php?pagina=9&nombre_registro=".str_replace(' ', '%20', $_GET['nombre_registro'])."&nombre_planilla=".str_replace(' ', '%20', $_GET['nombre_planilla']); ?> class="btn btn-outline-primary btn-sm">VER ESTRUCTURA</a></li>
-                    <li class='list-group-item'><a id="eliminarPlanilla" class="btn btn-outline-dark btn-sm" onclick="eliminar();">ELIMINAR PLANILLA</a></li>
-                </ul>
+                <div id = "llenarPlanilla">
+                
+                    <p id = 'nombreEditor'><?php echo $_GET["nombre_editor"] ?></p>
         
                 </div>
                 
@@ -132,7 +129,7 @@
 </div>
 <!-- ./ Layout wrapper -->
 
-<script src="view/assets/js/planilla.js"></script>
+<script src="view/assets/js/planilla-comun.js"></script>
 
 <!-- Main scripts -->
 <script src="view/vendors/bundle.js"></script>

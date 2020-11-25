@@ -8,10 +8,12 @@ if(isset($_GET["id"])){
 
     $nombre_registro = str_replace(" ", "_", $_SESSION["nombre_registro"])."_".$_SESSION["identificador"];
 
-    $identificador = $_GET["id"];
+    $identificador_usuario = $_GET["id"];
+    $identificador_editor = $_SESSION["identificador"];
     $registro = new Registro();
 
-    echo $registro->desvincularUsuario($identificador, $nombre_registro);
+    $registro->desvincularUsuarioUB($identificador_usuario, $identificador_editor, $_SESSION["nombre_registro"]);
+    echo $registro->desvincularUsuario($identificador_usuario, $nombre_registro);
 
 
 }else{

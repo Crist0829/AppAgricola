@@ -47,7 +47,7 @@ if($registros->cargarRegistrosBase($identificador)){
             <a class='dropdown-item' href='index.php?pagina=6&registro=".$registro["nombre"]."'><strong>AGREGAR PLANILLA</strong></a>
             <a class='dropdown-item' href='#'></a>
             <div class='dropdown-divider'></div>
-            <a class='dropdown-item' href='#'>ELIMINAR REGISTRO</a>
+            <a class='dropdown-item' href='index.php?pagina=10&nombre_registro=".str_replace(" ", "%20", $registro["nombre"])."'>ELIMINAR REGISTRO</a>
             </div>
         </div>
 

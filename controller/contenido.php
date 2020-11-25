@@ -1,5 +1,5 @@
 <?php 
-require_once("mensajes.php");
+include_once("mensajes.php");
 
 
 session_start();
@@ -73,19 +73,23 @@ function cargarContenido(){
             switch($pagina){
 
                 case 0:
-                    require_once("view/html/usuario-editor/editor.html");
+                    require_once("view/html/usuario-comun/default.html");
                 break;
 
                 case 1:
-                    require_once("view/html/usuario-editor/ajustes.html");
+                    require_once("view/html/usuario-comun/registros.html");
                 break;
 
                 case 2:
-                    require_once("view/html/usuario-editor/editor.html");
+                    require_once("view/html/usuario-comun/ajustes.html");
                 break;
 
                 case 3:
-                    require_once("view/html/usuario-editor/editor.html");
+                    require_once("view/html/usuario-comun/planilla.html");
+                break;
+
+                case 4:
+                    require_once("view/html/usuario-comun/administrar-cuenta.html");
                 break;
 
             }
@@ -133,8 +137,13 @@ function cargarContenido(){
                 break;
 
                 case 9:
-                    require_once("view/html/usuario-editor/estructura-planilla.html");
+                    require_once("view/html/usuario-editor/descargar-historial.html");
                 break;
+
+                case 10:
+                    require_once("view/html/usuario-editor/eliminar-registro.html");
+                break;
+
 
 
             }
